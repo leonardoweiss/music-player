@@ -83,7 +83,3 @@ function createBox() {
     box.appendChild(newInfo);
     document.body.style.backgroundImage = 'url(' + musicsData[now].img + ')';
 }
-var time = musics[now].duration;
-if (musics[now].ended) {
-    console.log(time);
-}
