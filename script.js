@@ -33,17 +33,20 @@ function playSong() {
         condition = true;
         btnPlay.innerHTML = '<i class="fas fa-play"></i>';
     }
-    var time = musics[now].duration;
-    console.log(time);
 }
 
 function nextSong(){
     musics[now].pause();
     musics[now].currentTime = 0;
-    musics[++now].play();
+    if (now == musics.length -1) {
+        now = 0;
+    } else {
+        ++now
+    }
+    musics[now].play();
     condition = false;
     document.getElementById('btn').innerHTML = '<i class="fas fa-pause"></i>';
-    if (now > musics.length - 1) {
+    if (now == 3) {
         now = 0;
     }
 }
@@ -51,12 +54,14 @@ function nextSong(){
 function backSong(){
     musics[now].pause();
     musics[now].currentTime = 0;
-    musics[--now].play();
+    if (now == 0) {
+        now = musics.length -1;
+    } else {
+        --now
+    }
+    musics[now].play();
     condition = false;
     document.getElementById('btn').innerHTML = '<i class="fas fa-pause"></i>';
-    if (now < 0) {
-        now = musics.length - 1;
-    }
 }
 
 function createBox() {
@@ -76,5 +81,9 @@ function createBox() {
     newInfo.appendChild(h3);
     newInfo.appendChild(p);
     box.appendChild(newInfo);
-    document.body.style.backgroundImage = musicsData[now].img;
+    document.body.style.backgroundImage = 'url(' + musicsData[now].img + ')';
+}
+var time = musics[now].duration;
+if (musics[now].ended) {
+    console.log(time);
 }
