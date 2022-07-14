@@ -1,4 +1,4 @@
-class music{
+class Music{
     constructor(name, artist, img, songPath, time){
         this.name = name;
         this.artist = artist;
@@ -8,9 +8,9 @@ class music{
     }
 }
 
-var sorrisos = new music('Sorrisos feat. Lourena', 'L7NNON', 'img/sorrisos.jpg', 'song/sorrisos.mp3', 240);
-var leal = new music('Leal', 'Djonga', 'img/leal.jpg', 'song/leal.mp3', 222);
-var lose = new music('Lose Yourself', 'Eminem', 'img/lose.jpg', 'song/lose.mp3', 319.9);
+var sorrisos = new Music('Sorrisos feat. Lourena', 'L7NNON', 'img/sorrisos.jpg', 'song/sorrisos.mp3', 240);
+var leal = new Music('Leal', 'Djonga', 'img/leal.jpg', 'song/leal.mp3', 222);
+var lose = new Music('Lose Yourself', 'Eminem', 'img/lose.jpg', 'song/lose.mp3', 319.9);
 
 const sorrisosAudio = new Audio(sorrisos.songPath);
 const lealAudio = new Audio(leal.songPath);
@@ -82,4 +82,22 @@ function createBox() {
     newInfo.appendChild(p);
     box.appendChild(newInfo);
     document.body.style.backgroundImage = 'url(' + musicsData[now].img + ')';
+}
+
+var endSong = setInterval(() => {
+    if (musics[now].ended) {
+        nextSong();
+        createBox();
+    }
+    rangeTime();
+}, 1000);
+
+function rangeTime() {
+    var timeLine = document.getElementById('range');
+    timeLine.max = musics[now].duration;
+    timeLine.value = musics[now].currentTime;
+}
+
+function timeNow() {
+    musics[now].currentTime = document.getElementById('range').value;
 }

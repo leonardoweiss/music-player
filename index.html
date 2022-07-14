@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="style.css">
         <script src="script.js" defer="defer"></script>
         <!-- Font Awesome -->
-		<script src="https://kit.fontawesome.com/fcba8eb07f.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/fcba8eb07f.js" crossorigin="anonymous"></script>
     </head>
     <body onload="createBox()">
         <div id="black">
@@ -15,6 +15,7 @@
                 <div id="box">
                     <div id="info"></div>
                 </div>
+                <input type="range" step="1" id="range" onclick="timeNow()">
                 <div id="buttons">
                     <button type="button" onclick="backSong(), createBox()" id="back">
                         <i class="fas fa-backward"></i>
