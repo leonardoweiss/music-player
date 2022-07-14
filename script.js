@@ -28,6 +28,7 @@ function playSong() {
         musics[now].play();
         condition = false;
         btnPlay.innerHTML = '<i class="fas fa-pause"></i>';
+        setInterval(toCount(), 1000);
     } else {
         musics[now].pause();
         condition = true;
@@ -49,6 +50,10 @@ function nextSong(){
     if (now == 3) {
         now = 0;
     }
+    var seconds = document.getElementById('seg');
+    seconds.innerHTML = '00';
+    var minutes = document.getElementById('min');
+    minutes.innerHTML = '00';
 }
 
 function backSong(){
@@ -82,6 +87,24 @@ function createBox() {
     newInfo.appendChild(p);
     box.appendChild(newInfo);
     document.body.style.backgroundImage = 'url(' + musicsData[now].img + ')';
+
+    var durationTime = musicsData[now].time;
+    var sec = durationTime % 60;
+    sec = Math.floor(sec);
+    var min = durationTime / 60;
+    min = Math.trunc(min);
+    var seconds = document.getElementById('segT');
+    var minutes = document.getElementById('minT');
+    if (sec < 9) {
+        seconds.innerHTML = '0' + sec;
+    } else {
+        seconds.innerHTML = sec;
+    }
+    if (min < 9) {
+        minutes.innerHTML = '0' + min;
+    } else {
+        minutes.innerHTML = min;
+    }
 }
 
 var endSong = setInterval(() => {
@@ -96,6 +119,34 @@ function rangeTime() {
     var timeLine = document.getElementById('range');
     timeLine.max = musics[now].duration;
     timeLine.value = musics[now].currentTime;
+    var seconds = document.getElementById('seg');
+    var minutes = document.getElementById('min');
+    var realTime = musics[now].currentTime;
+    var rest = realTime % 60;
+    rest = Math.trunc(rest);
+    realTime = Math.trunc(realTime);
+    var min = realTime / 60;
+    min = Math.trunc(min);
+    if (realTime < 60) {
+        if (realTime < 9) {
+            seconds.innerHTML = '0' + realTime;
+        } else {
+            seconds.innerHTML = realTime;
+        }
+    } else {
+        if (rest < 9) {
+            seconds.innerHTML = '0' + rest;
+        } else {
+            seconds.innerHTML = rest;
+        }
+        if (realTime > 1) {
+            if (min < 9) {
+                minutes.innerHTML = '0' + min;
+            } else {
+                minutes.innerHTML = min;
+            }
+        }
+    }
 }
 
 function timeNow() {

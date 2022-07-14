@@ -15,7 +15,15 @@
                 <div id="box">
                     <div id="info"></div>
                 </div>
-                <input type="range" step="1" id="range" onclick="timeNow()">
+                <input type="range" value="0" step="1" id="range" onclick="timeNow()">
+                <div id="timeMusic">
+                    <div id="parcial">
+                        <span id="min">00</span>:<span id="seg">00</span>
+                    </div>
+                    <div id="total">
+                        <span id="minT">00</span>:<span id="segT">00</span>
+                    </div>
+                </div>
                 <div id="buttons">
                     <button type="button" onclick="backSong(), createBox()" id="back">
                         <i class="fas fa-backward"></i>
