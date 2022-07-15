@@ -10,13 +10,19 @@ class Music{
 
 var sorrisos = new Music('Sorrisos feat. Lourena', 'L7NNON', 'img/sorrisos.jpg', 'song/sorrisos.mp3', 240);
 var leal = new Music('Leal', 'Djonga', 'img/leal.jpg', 'song/leal.mp3', 222);
-var lose = new Music('Lose Yourself', 'Eminem', 'img/lose.jpg', 'song/lose.mp3', 319.9);
+var lose = new Music('Lose Yourself', 'Eminem', 'img/lose.jpg', 'song/lose.mp3', 320);
+var perdicao = new Music('Perdição', 'L7NNON', 'img/perdicao.jpg', 'song/perdicao.mp3', 274);
+var dizeres = new Music('Dizeres feat. Lourena e Sant', 'Rap Box', 'img/dizeres.webp', 'song/dizeres.mp3', 272);
+var eu = new Music('Eu', 'Djonga', 'img/eu.jpg', 'song/eu.mp3', 313)
 
 const sorrisosAudio = new Audio(sorrisos.songPath);
 const lealAudio = new Audio(leal.songPath);
 const loseAudio = new Audio(lose.songPath);
-const musics = [sorrisosAudio, lealAudio, loseAudio];
-const musicsData = [sorrisos, leal, lose];
+const perdicaoAudio = new Audio(perdicao.songPath);
+const dizeresAudio = new Audio(dizeres.songPath)
+const euAudio = new Audio(eu.songPath);
+const musics = [sorrisosAudio, lealAudio, loseAudio, perdicaoAudio, dizeresAudio, euAudio];
+const musicsData = [sorrisos, leal, lose, perdicao, dizeres, eu];
 
 var box = document.getElementById('box');
 
@@ -95,12 +101,12 @@ function createBox() {
     min = Math.trunc(min);
     var seconds = document.getElementById('segT');
     var minutes = document.getElementById('minT');
-    if (sec < 9) {
+    if (sec < 10) {
         seconds.innerHTML = '0' + sec;
     } else {
         seconds.innerHTML = sec;
     }
-    if (min < 9) {
+    if (min < 10) {
         minutes.innerHTML = '0' + min;
     } else {
         minutes.innerHTML = min;
@@ -128,19 +134,19 @@ function rangeTime() {
     var min = realTime / 60;
     min = Math.trunc(min);
     if (realTime < 60) {
-        if (realTime < 9) {
+        if (realTime < 10) {
             seconds.innerHTML = '0' + realTime;
         } else {
             seconds.innerHTML = realTime;
         }
     } else {
-        if (rest < 9) {
+        if (rest < 10) {
             seconds.innerHTML = '0' + rest;
         } else {
             seconds.innerHTML = rest;
         }
         if (realTime > 1) {
-            if (min < 9) {
+            if (min < 10) {
                 minutes.innerHTML = '0' + min;
             } else {
                 minutes.innerHTML = min;
