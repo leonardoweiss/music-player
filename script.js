@@ -53,9 +53,6 @@ function nextSong(){
     musics[now].play();
     condition = false;
     document.getElementById('btn').innerHTML = '<i class="fas fa-pause"></i>';
-    if (now == 3) {
-        now = 0;
-    }
     var seconds = document.getElementById('seg');
     seconds.innerHTML = '00';
     var minutes = document.getElementById('min');
