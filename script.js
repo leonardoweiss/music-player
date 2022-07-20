@@ -70,6 +70,10 @@ function backSong(){
     musics[now].play();
     condition = false;
     document.getElementById('btn').innerHTML = '<i class="fas fa-pause"></i>';
+    var seconds = document.getElementById('seg');
+    seconds.innerHTML = '00';
+    var minutes = document.getElementById('min');
+    minutes.innerHTML = '00';
 }
 
 function createBox() {
