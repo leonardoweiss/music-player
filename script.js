@@ -3,7 +3,7 @@ class Music{
         this.name = name;
         this.artist = artist;
         this.img = img;
-        this.songPath = songPath;
+        this.songPath = new Audio(songPath);
         this.time = time;
     }
 }
@@ -13,16 +13,8 @@ var leal = new Music('Leal', 'Djonga', 'img/leal.jpg', 'song/leal.mp3', 222);
 var lose = new Music('Lose Yourself', 'Eminem', 'img/lose.jpg', 'song/lose.mp3', 320);
 var perdicao = new Music('Perdição', 'L7NNON', 'img/perdicao.jpg', 'song/perdicao.mp3', 274);
 var dizeres = new Music('Dizeres feat. Lourena e Sant', 'Rap Box', 'img/dizeres.webp', 'song/dizeres.mp3', 272);
-var eu = new Music('Eu', 'Djonga', 'img/eu.jpg', 'song/eu.mp3', 313)
-
-const sorrisosAudio = new Audio(sorrisos.songPath);
-const lealAudio = new Audio(leal.songPath);
-const loseAudio = new Audio(lose.songPath);
-const perdicaoAudio = new Audio(perdicao.songPath);
-const dizeresAudio = new Audio(dizeres.songPath)
-const euAudio = new Audio(eu.songPath);
-const musics = [sorrisosAudio, lealAudio, loseAudio, perdicaoAudio, dizeresAudio, euAudio];
-const musicsData = [sorrisos, leal, lose, perdicao, dizeres, eu];
+var eu = new Music('Eu', 'Djonga', 'img/eu.jpg', 'song/eu.mp3', 313);
+const musics = [sorrisos, leal, lose, perdicao, dizeres, eu];
 
 var box = document.getElementById('box');
 
@@ -31,26 +23,25 @@ var condition = true;
 function playSong() {
     var btnPlay = document.getElementById('btn');
     if (condition) {
-        musics[now].play();
+        musics[now].songPath.play();
         condition = false;
         btnPlay.innerHTML = '<i class="fas fa-pause"></i>';
-        setInterval(toCount(), 1000);
     } else {
-        musics[now].pause();
+        musics[now].songPath.pause();
         condition = true;
         btnPlay.innerHTML = '<i class="fas fa-play"></i>';
     }
 }
 
 function nextSong(){
-    musics[now].pause();
-    musics[now].currentTime = 0;
+    musics[now].songPath.pause();
+    musics[now].songPath.currentTime = 0;
     if (now == musics.length -1) {
         now = 0;
     } else {
         ++now
     }
-    musics[now].play();
+    musics[now].songPath.play();
     condition = false;
     document.getElementById('btn').innerHTML = '<i class="fas fa-pause"></i>';
     var seconds = document.getElementById('seg');
@@ -60,14 +51,14 @@ function nextSong(){
 }
 
 function backSong(){
-    musics[now].pause();
-    musics[now].currentTime = 0;
+    musics[now].songPath.pause();
+    musics[now].songPath.currentTime = 0;
     if (now == 0) {
         now = musics.length -1;
     } else {
         --now
     }
-    musics[now].play();
+    musics[now].songPath.play();
     condition = false;
     document.getElementById('btn').innerHTML = '<i class="fas fa-pause"></i>';
     var seconds = document.getElementById('seg');
@@ -82,20 +73,20 @@ function createBox() {
     let newInfo = document.createElement('div');
     newInfo.id = 'info'
     let image = document.createElement('img');
-    image.src = musicsData[now].img;
+    image.src = musics[now].img;
     let h3 = document.createElement('h3');
-    let h3text = document.createTextNode(musicsData[now].name);
+    let h3text = document.createTextNode(musics[now].name);
     let p = document.createElement('p');
-    let ptext = document.createTextNode(musicsData[now].artist);
+    let ptext = document.createTextNode(musics[now].artist);
     p.appendChild(ptext);
     h3.appendChild(h3text);
     newInfo.appendChild(image);
     newInfo.appendChild(h3);
     newInfo.appendChild(p);
     box.appendChild(newInfo);
-    document.body.style.backgroundImage = 'url(' + musicsData[now].img + ')';
+    document.body.style.backgroundImage = 'url(' + musics[now].img + ')';
 
-    var durationTime = musicsData[now].time;
+    var durationTime = musics[now].time;
     var sec = durationTime % 60;
     sec = Math.floor(sec);
     var min = durationTime / 60;
@@ -115,7 +106,7 @@ function createBox() {
 }
 
 var endSong = setInterval(() => {
-    if (musics[now].ended) {
+    if (musics[now].songPath.ended) {
         nextSong();
         createBox();
     }
@@ -124,11 +115,11 @@ var endSong = setInterval(() => {
 
 function rangeTime() {
     var timeLine = document.getElementById('range');
-    timeLine.max = musics[now].duration;
-    timeLine.value = musics[now].currentTime;
+    timeLine.max = musics[now].songPath.duration;
+    timeLine.value = musics[now].songPath.currentTime;
     var seconds = document.getElementById('seg');
     var minutes = document.getElementById('min');
-    var realTime = musics[now].currentTime;
+    var realTime = musics[now].songPath.currentTime;
     var rest = realTime % 60;
     rest = Math.trunc(rest);
     realTime = Math.trunc(realTime);
@@ -157,5 +148,5 @@ function rangeTime() {
 }
 
 function timeNow() {
-    musics[now].currentTime = document.getElementById('range').value;
+    musics[now].songPath.currentTime = document.getElementById('range').value;
 }
